@@ -1,3 +1,59 @@
 .Dropdown {
+  position: relative;
+  max-width: 200px;
+  width: 100%;
+  color: var(--color-text);
+  transition: color var(--transition-duration) var(--transition-timing-function);
 
+  .CurrentItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    padding: 15px 40px 15px 20px;
+    border-radius: var(--bd-radius);
+    box-shadow: var(--shadow);
+    background-color: var(--color-ui-base);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
+  }
+
+  .Icon {
+    position: absolute;
+    right: 15px;
+    top: 32%;
+    pointer-events: none;
+    transform: rotate(0);
+    transition: transform var(--transition-duration) var(--transition-timing-function);
+  }
+
+  .ActiveIcon {
+    transform: rotate(180deg);
+  }
+
+  .List {
+    padding: 15px 20px;
+    margin-top: 5px;
+    background-color: var(--color-ui-base);
+    border-radius: var(--bd-radius);
+    box-shadow: var(--shadow);
+    position: absolute;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity var(--transition-duration) var(--transition-timing-function), transform var(--transition-duration) var(--transition-timing-function);
+
+    .Item {
+
+    }
+  }
+
+  .Active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito Sans');
+
+@import-normalize;
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+}
+
+:root {
+    --mobile: 375px;
+    --family: 'Nunito Sans', sans-serif;
+    --fs-sm: 14px;
+    --fs-md: 16px;
+    --fw-light: 300;
+    --fw-memium: 600;
+    --fw-bold: 800;
+    --bd-radius: 6px;
+    --transition-duration: 0.2s;
+    --transition-timing-function: ease-in-out;
+}
+
+/* Themes */
+
+body[data-theme = "dark"] {
+    --color-text: hsl(0, 0%, 100%);
+    --color-bg: hsl(207, 26%, 17%);
+    --color-ui-base: hsl(209, 23%, 22%);
+
+    --shadow: rgba(245, 245, 245, 0.2) 0 0 8px;
+}
+
+body[data-theme = "light"] {
+    --color-text: hsl(200, 15%, 8%);
+    --color-bg: hsl(0, 0%, 98%);
+    --color-ui-base: hsl(0, 0%, 100%);
+
+    --shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+}
+
+body {
+    margin: 0;
+    font-family: var(--family);
+    color: var(--color-text);
+    font-weight: var(--fw-light);
+    background-color: var(--color-bg);
+    transition-property: background-color;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+input:focus-visible {
+    outline: none;
+}
+
