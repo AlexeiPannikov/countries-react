@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito Sans');
+@import "./media-vars.scss";
 
 @import-normalize;
 
@@ -17,12 +18,11 @@ body, html {
 }
 
 :root {
-    --mobile: 375px;
     --family: 'Nunito Sans', sans-serif;
     --fs-sm: 14px;
     --fs-md: 16px;
     --fw-light: 300;
-    --fw-memium: 600;
+    --fw-medium: 600;
     --fw-bold: 800;
     --bd-radius: 6px;
     --transition-duration: 0.2s;

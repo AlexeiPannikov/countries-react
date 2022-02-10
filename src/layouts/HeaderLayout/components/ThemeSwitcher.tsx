@@ -1,16 +1,18 @@
 import React, {FC, useEffect} from 'react';
 // @ts-ignore
 import cl from "./ThemeSwitcher.module.scss";
-import {setThemeAction, ThemesEnum} from "../../../store/ThemeReducer";
+import {setTheme, ThemesEnum} from "../../../store/reducers/ThemesSlice";
 import {IoMoon, IoMoonOutline} from "react-icons/io5";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
+import {useTypedDispatch, useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const ThemeSwitcher: FC = () => {
-    const theme = useTypedSelector(state => state.theme);
-    const dispatch = useDispatch();
+    const {theme} = useTypedSelector(state => state.theme);
+    const dispatch = useTypedDispatch();
 
-    const toggleTheme = () => dispatch(setThemeAction(theme === ThemesEnum.Light ? ThemesEnum.Dark : ThemesEnum.Light));
+    const toggleTheme = () => {
+        dispatch(setTheme(theme === ThemesEnum.Light ? ThemesEnum.Dark : ThemesEnum.Light));
+        console.log(theme)
+    }
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme);

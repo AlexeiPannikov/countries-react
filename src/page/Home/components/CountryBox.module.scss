@@ -1,0 +1,51 @@
+@import "../../../assets/styles/media-vars.scss";
+
+.CountryBox {
+  cursor: pointer;
+  background-color: var(--color-ui-base);
+  box-shadow: var(--shadow);
+  color: var(--color-text);
+  border-radius: var(--bd-radius);
+  width: 100%;
+  transition: transform var(--transition-duration) var(--transition-timing-function), background-color var(--transition-duration) var(--transition-timing-function), color var(--transition-duration) var(--transition-timing-function);
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 170px;
+    border-top-left-radius: var(--bd-radius);
+    border-top-right-radius: var(--bd-radius);
+    object-fit: cover;
+    object-position: center;
+    box-shadow: var(--shadow);
+  }
+
+  .Body {
+    padding: 20px;
+    @media (max-width: $tablet) {
+      padding: 10px;
+    }
+
+    & > h2 {
+      font-size: var(--fs-md);
+      @media (max-width: $tablet) {
+        margin: 5px 0;
+      }
+    }
+
+    & > p {
+      font-size: var(--fs-sm);
+      @media (max-width: $tablet) {
+        margin: 5px 0;
+      }
+    }
+
+    .SubTitle {
+      font-weight: var(--fw-medium);
+    }
+  }
+}

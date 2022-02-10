@@ -1,11 +1,21 @@
+@import "../../assets/styles/media-vars.scss";
+
 .Dropdown {
   position: relative;
   max-width: 200px;
   width: 100%;
   color: var(--color-text);
   transition: color var(--transition-duration) var(--transition-timing-function);
+  margin-left: 20px;
+
+  @media (max-width: $mobile-big) {
+    margin-top: 20px;
+    margin-left: 0;
+    max-width: 100%;
+  }
 
   .CurrentItem {
+    color: var(--color-text);
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -17,8 +27,13 @@
     background-color: var(--color-ui-base);
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: background-color var(--transition-duration) var(--transition-timing-function);
+    transition: background-color var(--transition-duration) var(--transition-timing-function), color var(--transition-duration) var(--transition-timing-function);;
     z-index: 5;
+
+    &::placeholder {
+      color: var(--color-text);
+      font-weight: var(--fw-medium);
+    }
   }
 
   .Icon {
@@ -37,7 +52,6 @@
 
   .List {
     z-index: 4;
-    padding: 15px 20px;
     margin-top: 5px;
     background-color: var(--color-ui-base);
     border-radius: var(--bd-radius);
@@ -49,7 +63,23 @@
     transition: opacity var(--transition-duration) var(--transition-timing-function), transform var(--transition-duration) var(--transition-timing-function);
 
     .Item {
+      cursor: pointer;
+      padding: 15px 20px;
+      transition: background-color var(--transition-duration) linear;
 
+      &:first-child {
+        border-top-left-radius: var(--bd-radius);
+        border-top-right-radius: var(--bd-radius);
+      }
+
+      &:last-child {
+        border-bottom-right-radius: var(--bd-radius);
+        border-bottom-left-radius: var(--bd-radius);
+      }
+
+      &:hover {
+        background-color: var(--color-bg);
+      }
     }
   }
 

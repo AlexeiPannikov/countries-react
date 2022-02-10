@@ -1,14 +1,18 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {composeWithDevTools} from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import {themeReducer} from "./ThemeReducer";
-import {allCountries} from "./AllCountriesReducer";
+import themesSlice from "./reducers/ThemesSlice";
+import allCountriesSlice from "./reducers/AllCountriesSlice";
+import countrySlice from "./reducers/CountrySlice"
 
-const reducers = combineReducers({
-    theme: themeReducer,
-    allCountries: allCountries,
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
+
+const rootReducer = combineReducers({
+    theme: themesSlice,
+    allCountries: allCountriesSlice,
+    country: countrySlice
 })
 
-export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+export const store = configureStore({
+    reducer: rootReducer,
+})
 
-export type RootState = ReturnType<typeof reducers>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

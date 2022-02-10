@@ -1,6 +1,13 @@
+@import "../../assets/styles/media-vars.scss";
+
 .Toolbar {
   width: 100%;
   display: flex;
   padding: 40px 0;
   justify-content: space-between;
+
+  @media (max-width: $mobile-big) {
+    flex-direction: column;
+    padding: 20px 0;
+  }
 }
