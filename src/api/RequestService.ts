@@ -4,7 +4,10 @@ import CountryModel from "../models/CountryModel";
 export class RequestService {
     static async getAllCountries(): Promise<CountryModel[]> {
         try {
-            const res = await $api.get("/all");
+            const res = await $api.get("/all", {
+                params: {fields: "name,capital,flags,population,region,subregion,topLevelDomain,currencies,languages"}
+            });
+            console.log(res)
             return res?.data;
         } catch (e) {
             throw e

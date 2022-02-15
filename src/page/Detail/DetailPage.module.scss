@@ -1,11 +1,40 @@
 .Wrapper {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  color: var(--color-text);
+  transition: color var(--transition-duration) var(--transition-timing-function);
 
-  .Flag {
+  .Content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 
+    .Flag {
+      flex: 0 1 45%;
+      img {
+        width: 100%;
+      }
+    }
+
+    .Info {
+      flex: 0 1 50%;
+      align-self: center;
+
+      .Title {
+
+      }
+
+      .Sub {
+        display: flex;
+        justify-content: space-between;
+
+        .LeftCol {
+
+        }
+
+        .RightCol {
+
+        }
+      }
+    }
   }
-
-  .Info {}
 }

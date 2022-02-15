@@ -1,0 +1,17 @@
+.InfoItem {
+  margin: 10px 0;
+  font-size: var(--fs-sm);
+
+  h3 {
+    display: inline-block;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    margin: 0 10px 0 0;
+    min-width: max-content;
+  }
+
+  span {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-light);
+  }
+}

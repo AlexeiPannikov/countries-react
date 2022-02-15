@@ -27,9 +27,12 @@ const countrySlice = createSlice({
         getCountryError(state, action: PayloadAction<any>) {
             state.isLoading = false;
             state.error = action.payload;
+        },
+        removeCountry(state) {
+            state.country.splice(0)
         }
     }
 })
 
 export default countrySlice.reducer;
-export const {gettingCountry, getCountrySuccess, getCountryError} = countrySlice.actions;
+export const {gettingCountry, getCountrySuccess, getCountryError, removeCountry} = countrySlice.actions;

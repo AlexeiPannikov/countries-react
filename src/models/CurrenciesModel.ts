@@ -2,7 +2,7 @@ import USDModel from "./USDModel";
 
 export default class CurrenciesModel {
 
-    USD: USDModel = new USDModel();
+    object: {} = {};
 
     constructor(obj?: Partial<CurrenciesModel>) {
         if (obj) {

@@ -1,0 +1,18 @@
+.Button {
+
+  background-color: var(--color-ui-base);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+  border-radius: var(--bd-radius);
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-timing-function);
+
+  &:hover {
+
+  }
+
+  .Text {
+    display: flex;
+    align-items: center;
+  }
+}
