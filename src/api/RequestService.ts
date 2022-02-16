@@ -5,7 +5,7 @@ export class RequestService {
     static async getAllCountries(): Promise<CountryModel[]> {
         try {
             const res = await $api.get("/all", {
-                params: {fields: "name,capital,flags,population,region,subregion,topLevelDomain,currencies,languages"}
+                params: {fields: "name,capital,flags,population,region,subregion,topLevelDomain,currencies,languages,borders"}
             });
             console.log(res)
             return res?.data;

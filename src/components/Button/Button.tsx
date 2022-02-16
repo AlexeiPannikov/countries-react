@@ -5,9 +5,10 @@ import cl from "./Button.module.scss";
 interface IProps {
     padding?: string;
     fontSize?: number;
+    onClick: any;
 }
 
-const Button: FC<IProps> = ({children, padding, fontSize}) => {
+const Button: FC<IProps> = ({children, padding, fontSize, onClick}) => {
 
     function getStyleButton(): object {
         return {
@@ -17,7 +18,7 @@ const Button: FC<IProps> = ({children, padding, fontSize}) => {
     }
 
     return (
-        <div className={cl.Button} style={getStyleButton()}>
+        <div onClick={() => onClick()} className={cl.Button} style={getStyleButton()}>
             <div className={cl.Text}>{children}</div>
         </div>
     );

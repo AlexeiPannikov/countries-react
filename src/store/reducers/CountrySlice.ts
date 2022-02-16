@@ -1,15 +1,27 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import CountryModel from "../../models/CountryModel";
+import FlagsModel from "../../models/FlagsModel";
+import NameModel from "../../models/NameModel";
 
 interface ICountry {
     isLoading: boolean;
-    country: CountryModel[];
+    country: CountryModel;
     error: any;
 }
 
 const initialState: ICountry = {
     isLoading: false,
-    country: [],
+    country: {
+        borders: [],
+        capital: [],
+        currencies: {},
+        flags: {svg: "", png: ""},
+        languages: {},
+        name: {nativeName: {}, official: "", common: ""},
+        population: 0,
+        region: "",
+        subregion: "",
+    } as CountryModel,
     error: null,
 };
 
@@ -18,9 +30,10 @@ const countrySlice = createSlice({
     initialState,
     reducers: {
         gettingCountry(state) {
+            // state.country = {};
             state.isLoading = true;
         },
-        getCountrySuccess(state, action: PayloadAction<CountryModel[]>) {
+        getCountrySuccess(state, action: PayloadAction<CountryModel>) {
             state.isLoading = false;
             state.country = action.payload;
         },
@@ -28,11 +41,21 @@ const countrySlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        removeCountry(state) {
-            state.country.splice(0)
+        clearCountry(state) {
+            state.country = {
+                borders: [],
+                capital: [],
+                currencies: {},
+                flags: {svg: "", png: ""},
+                languages: {},
+                name: {nativeName: {}, official: "", common: ""},
+                population: 0,
+                region: "",
+                subregion: "",
+            } as CountryModel
         }
     }
 })
 
 export default countrySlice.reducer;
-export const {gettingCountry, getCountrySuccess, getCountryError, removeCountry} = countrySlice.actions;
+export const {gettingCountry, getCountrySuccess, getCountryError, clearCountry} = countrySlice.actions;
