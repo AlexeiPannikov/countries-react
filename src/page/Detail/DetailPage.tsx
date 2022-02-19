@@ -11,6 +11,9 @@ import cl from "./DetailPage.module.scss"
 import InfoItem from "./components/InfoItem/InfoItem";
 import Button from "../../components/Button/Button";
 import {IoArrowBack} from "react-icons/io5";
+import BorderCountries from "./components/BorderCountries/BorderCountries";
+import Message from "../../components/Message/Message";
+import {MessageTypesEnum} from "../../components/Message/MessageTypesEnum";
 
 const DetailPage = () => {
     const {name} = useParams();
@@ -18,14 +21,15 @@ const DetailPage = () => {
     const navigate = useNavigate();
 
     const {isLoading, country, error} = useTypedSelector(state => state.country);
+    const countries = useTypedSelector(state => state.allCountries).countries;
 
     useEffect(() => {
         if (!(name === country.name.common)) {
             dispatch(getCountryAsync(name))
         }
-    }, [dispatch, country.name.common])
+    }, [dispatch, country.name.common, name])
 
-    function getValueArrOfObject(obj: object, ...indexes: Array<number>): any[] {
+    function getValueArrOfObject(obj: object, ...indexes: Array<number>): string[] {
         const valueArr: string[] = [];
         for (const key in obj) {
             if (typeof (obj as any)[key] === "object") {
@@ -44,6 +48,18 @@ const DetailPage = () => {
             return newValueArr;
         }
         return valueArr;
+    }
+
+    function getBorderCountries(borderCountries: string[]): string[] {
+        if (countries.length === 0) return [];
+        const names: string[] = [];
+        for (let value of borderCountries) {
+            let foundCountry = countries.find(item => item.cca3 === value)
+            if (foundCountry) {
+                names.push(foundCountry.name.common)
+            }
+        }
+        return names
     }
 
     function goBack() {
@@ -82,17 +98,16 @@ const DetailPage = () => {
                                         <InfoItem title="Languages" text={getValueArrOfObject(country.languages)}/>
                                     </div>
                                 </div>
-                                <div className={cl.BorderButtons}>
-                                    {
-                                        !error && country.hasOwnProperty("borders") &&
-                                        country.borders.map(item => <div>{item}</div>)
-                                    }
-                                </div>
+                                {
+                                    !error && country.hasOwnProperty("borders") &&
+                                    <BorderCountries countries={getBorderCountries(country.borders)}/>
+                                }
                             </div>
                         </div>
                     }
                     {
-                        error && <div>{error.message}</div>
+                        error &&
+                        <Message type={MessageTypesEnum.Error} message={error.message}/>
                     }
                 </div>
             </Content>

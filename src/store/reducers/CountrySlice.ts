@@ -21,6 +21,7 @@ const initialState: ICountry = {
         population: 0,
         region: "",
         subregion: "",
+        cca3: ""
     } as CountryModel,
     error: null,
 };
@@ -52,6 +53,7 @@ const countrySlice = createSlice({
                 population: 0,
                 region: "",
                 subregion: "",
+                cca3: ""
             } as CountryModel
         }
     }

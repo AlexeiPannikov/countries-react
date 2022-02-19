@@ -4,7 +4,7 @@ import cl from "./Button.module.scss";
 
 interface IProps {
     padding?: string;
-    fontSize?: number;
+    fontSize?: string;
     onClick: any;
 }
 

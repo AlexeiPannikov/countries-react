@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 // @ts-ignore
 import cl from "./Dropdown.module.scss";
 import {IoChevronUpSharp} from "react-icons/io5";
@@ -10,20 +10,32 @@ import {useClickOutside} from "../../hooks/useClickOutside";
 interface IProps {
     placeholder: string;
     list: DropdownItemModel[];
+    onChange: (value: string) => any;
 }
 
-const Dropdown: FC<IProps> = ({list, placeholder}) => {
+const Dropdown: FC<IProps> = ({list, placeholder, onChange}) => {
     const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
     const [currentItem, setCurrentItem] = useState<DropdownItemModel>(new DropdownItemModel())
     const dropdownEl = useRef(null);
 
     function toggleVisibility() {
-        setIsVisibleDropdown(!isVisibleDropdown);
+        setIsVisibleDropdown(isVisibleDropdown => !isVisibleDropdown);
     }
+
+    useEffect(() => {
+        const activeItem = list.find(item => item.isActive);
+        if (activeItem) {
+            setCurrentItem(activeItem);
+        }
+    }, [list])
 
     function selectItem(item: DropdownItemModel) {
         setIsVisibleDropdown(false);
+        list.forEach(el => {
+            el.isActive = el.value === item.value;
+        })
         setCurrentItem(item);
+        onChange(item.value as string)
     }
 
     useClickOutside(dropdownEl, () => setIsVisibleDropdown(false));

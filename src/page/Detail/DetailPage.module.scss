@@ -1,3 +1,5 @@
+@import "../../assets/styles/media-vars.scss";
+
 .Wrapper {
   width: 100%;
   color: var(--color-text);
@@ -7,6 +9,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    @media (max-width: $tablet) {
+      flex-direction: column;
+    }
 
     .Flag {
       flex: 0 1 45%;
@@ -19,26 +24,38 @@
     .Info {
       flex: 0 1 50%;
       align-self: center;
+      @media (max-width: $sm-desktop) {
+        margin-left: 20px;
+        align-self: flex-start;
+      }
+      @media (max-width: $tablet) {
+        margin-left: 0;
+      }
 
       .Title {
-
+        @media (max-width: $sm-desktop) {
+          margin-top: 0;
+        }
+        @media (max-width: $tablet) {
+          margin-top: 10px;
+        }
       }
 
       .Sub {
         display: flex;
         justify-content: space-between;
+        @media (max-width: $sm-desktop) {
+          flex-direction: column;
+          justify-content: flex-start;
+        }
 
         .LeftCol {
-
+          flex: 1 1 50%;
         }
 
         .RightCol {
-
+          flex: 1 1 50%;
         }
-      }
-
-      .BorderButtons {
-
       }
     }
   }

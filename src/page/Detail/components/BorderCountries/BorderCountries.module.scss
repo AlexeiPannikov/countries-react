@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/media-vars.scss";
+
+.BorderCountries {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  color: var(--color-text);
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .Title {
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-sm);
+    margin: 0 10px 0 0;
+    padding-top: 5px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    @media (max-width: $tablet) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .Buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    align-items: start;
+    justify-items: start;
+    @media (max-width: $sm-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: $mobile-small) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

@@ -19,7 +19,7 @@ export default class CountryModel {
     // capitalInfo: CapitalInfoModel = new CapitalInfoModel();
     // car: CarModel = new CarModel();
     // cca2: string = "";
-    // cca3: string = "";
+    cca3: string = "";
     // ccn3: string = "";
     // cioc: string = "";
     // coatOfArms: CoatOfArmsModel = new CoatOfArmsModel();
