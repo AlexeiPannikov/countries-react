@@ -13,7 +13,7 @@ const BorderCountries: FC<IProps> = ({countries}) => {
     const navigate = useNavigate();
 
     function openCountryPage(value: string) {
-        navigate(`/${value}`, {replace: true})
+        navigate(`../country/${value}`, {replace: true})
     }
 
     return (

@@ -13,7 +13,7 @@ const CountryBox: FC<IProps> = ({country}) => {
     const navigate = useNavigate()
 
     function openDetailPage() {
-        navigate(`${country.name.common}`)
+        navigate(`country/${country.name.common}`);
     }
 
     return (

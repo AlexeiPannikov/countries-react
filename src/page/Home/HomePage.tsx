@@ -14,7 +14,6 @@ import CountryModel from "../../models/CountryModel";
 import {MessageTypesEnum} from "../../components/Message/MessageTypesEnum";
 import Message from "../../components/Message/Message";
 import {useSearchParams} from "react-router-dom";
-import {log} from "util";
 
 const HomePage = () => {
     const {isLoading, countries, error} = useTypedSelector(state => state.allCountries);
