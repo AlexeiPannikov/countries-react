@@ -18,7 +18,7 @@ const themesSlice = createSlice({
     initialState,
     reducers: {
         setTheme(state, action: PayloadAction<ThemesEnum>) {
-            state.theme = action.payload
+            state.theme = action.payload;
         }
     }
 })

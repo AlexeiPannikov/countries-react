@@ -14,7 +14,7 @@
     font-weight: var(--fw-medium);
     font-size: var(--fs-sm);
     margin: 0 10px 0 0;
-    padding-top: 5px;
+    padding-top: 10px;
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -25,16 +25,13 @@
 
   .Buttons {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
-    align-items: start;
-    justify-items: start;
+    display: flex;
+    flex-wrap: wrap;
     @media (max-width: $sm-desktop) {
-      grid-template-columns: repeat(3, 1fr);
+
     }
     @media (max-width: $mobile-small) {
-      grid-template-columns: repeat(2, 1fr);
+
     }
   }
 }

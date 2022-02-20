@@ -13,12 +13,13 @@ import cl from "./HomePage.module.scss";
 import CountryModel from "../../models/CountryModel";
 import {MessageTypesEnum} from "../../components/Message/MessageTypesEnum";
 import Message from "../../components/Message/Message";
+import {useSearchParams} from "react-router-dom";
+import {log} from "util";
 
 const HomePage = () => {
     const {isLoading, countries, error} = useTypedSelector(state => state.allCountries);
     const [filteredCountries, setFilteredCountries] = useState<CountryModel[]>([]);
-    const [searchText, setSearchText] = useState("");
-    const [currentRegion, setCurrentRegion] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [list, setList] = useState([
         new DropdownItemModel({name: "All Regions", value: "", isActive: true}),
@@ -30,27 +31,33 @@ const HomePage = () => {
     ])
 
     useEffect(() => {
-        handleSearch()
-    }, [countries, searchText, currentRegion])
+        handleSearch();
+    }, [countries, searchParams.get("text"), searchParams.get("region")])
 
-    function handleSearch() {
-        if (countries.length === 0) return [];
+    function handleSearch(isFirstRender: boolean = false) {
+        if (countries.length === 0) return;
         let data = [...countries];
-        if (searchText) {
-            data = data.filter(item => item.name.official.toLocaleLowerCase().replace(/\s/g, '').includes(searchText.toLocaleLowerCase()))
+        if (isFirstRender) {
+            setFilteredCountries(data);
+            return;
         }
-        if (currentRegion) {
-            data = data.filter(item => item.region.toLocaleLowerCase().includes(currentRegion.toLocaleLowerCase()))
+        const textFromParams = searchParams.get("text");
+        const regionFromParams = searchParams.get("region");
+        if (textFromParams) {
+            data = data.filter(item => item.name.official.toLocaleLowerCase().replace(/\s/g, '').includes(textFromParams.toLocaleLowerCase()))
+        }
+        if (regionFromParams) {
+            data = data.filter(item => item.region.toLocaleLowerCase().includes(regionFromParams.toLocaleLowerCase()))
         }
         setFilteredCountries(data)
     }
 
     function setText(text: string) {
-        setSearchText(text)
+        setSearchParams({text, region: searchParams.get("region") || ""});
     }
 
     function setRegion(region: string) {
-        setCurrentRegion(region)
+        setSearchParams({text: searchParams.get("text") || "", region});
     }
 
     return (

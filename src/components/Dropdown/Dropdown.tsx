@@ -6,6 +6,7 @@ import {CSSTransition} from "react-transition-group";
 import DropdownItemModel from "./DropdownItemModel";
 import DropdownItem from "./DropdownItem";
 import {useClickOutside} from "../../hooks/useClickOutside";
+import {useSearchParams} from "react-router-dom";
 
 interface IProps {
     placeholder: string;
@@ -17,10 +18,27 @@ const Dropdown: FC<IProps> = ({list, placeholder, onChange}) => {
     const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
     const [currentItem, setCurrentItem] = useState<DropdownItemModel>(new DropdownItemModel())
     const dropdownEl = useRef(null);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     function toggleVisibility() {
         setIsVisibleDropdown(isVisibleDropdown => !isVisibleDropdown);
     }
+
+    useEffect(() => {
+        const region = searchParams.get("region");
+        if (region) {
+            const foundItem = list.find(item => item.value === region);
+            if (foundItem) {
+                foundItem.isActive = true;
+                setCurrentItem(foundItem)
+                list.forEach(el => {
+                    if (el.value !== foundItem.value) {
+                        el.isActive = false
+                    }
+                })
+            }
+        }
+    })
 
     useEffect(() => {
         const activeItem = list.find(item => item.isActive);

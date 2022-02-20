@@ -4,16 +4,35 @@ import cl from "./Button.module.scss";
 
 interface IProps {
     padding?: string;
+    margin?: string;
     fontSize?: string;
+    width?: string;
+    height?: string;
+    contentCenter?: boolean;
     onClick: any;
 }
 
-const Button: FC<IProps> = ({children, padding, fontSize, onClick}) => {
+const Button: FC<IProps> = ({
+                                children,
+                                padding,
+                                margin,
+                                fontSize,
+                                width,
+                                height,
+                                contentCenter,
+                                onClick
+                            }) => {
 
     function getStyleButton(): object {
         return {
             padding: padding || '10px 20px',
-            fontSize: fontSize || 'var(--fs-sm)'
+            margin: margin || '0',
+            fontSize: fontSize || 'var(--fs-sm)',
+            width: width || 'auto',
+            height: height || 'auto',
+            display: contentCenter && 'flex',
+            alignItems: contentCenter && 'center',
+            justifyContent: contentCenter && 'center'
         }
     }
 

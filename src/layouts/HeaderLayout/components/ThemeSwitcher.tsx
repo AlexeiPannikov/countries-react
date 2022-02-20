@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 // @ts-ignore
 import cl from "./ThemeSwitcher.module.scss";
 import {setTheme, ThemesEnum} from "../../../store/reducers/ThemesSlice";
@@ -6,22 +6,31 @@ import {IoMoon, IoMoonOutline} from "react-icons/io5";
 import {useTypedDispatch, useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const ThemeSwitcher: FC = () => {
-    const {theme} = useTypedSelector(state => state.theme);
-    const dispatch = useTypedDispatch();
 
     const toggleTheme = () => {
-        dispatch(setTheme(theme === ThemesEnum.Light ? ThemesEnum.Dark : ThemesEnum.Light));
-        console.log(theme)
+        if(localStorage.getItem("theme")) {
+            let theme = (localStorage.getItem("theme") as string) == ThemesEnum.Light ? ThemesEnum.Dark : ThemesEnum.Light
+            localStorage.setItem("theme", theme);
+            document.body.setAttribute('data-theme', theme);
+        }
     }
 
     useEffect(() => {
-        document.body.setAttribute('data-theme', theme);
+        const storageTheme = localStorage.getItem("theme");
+        console.log(storageTheme)
+        if (storageTheme) {
+            document.body.setAttribute('data-theme', storageTheme);
+        } else {
+            localStorage.setItem("theme", ThemesEnum.Light);
+            document.body.setAttribute('data-theme', ThemesEnum.Light);
+        }
     })
+
     return (
         <div className={cl.ThemeSwitcher} onClick={toggleTheme}>
-            { theme === ThemesEnum.Light ?
-                <div className={cl.Wrapper}><IoMoon/><span>Light Theme</span></div>  :
-                <div className={cl.Wrapper}><IoMoonOutline /><span>Dark Theme</span></div>
+            {localStorage.getItem("theme") === ThemesEnum.Light ?
+                <div className={cl.Wrapper}><IoMoon/><span>Light Theme</span></div> :
+                <div className={cl.Wrapper}><IoMoonOutline/><span>Dark Theme</span></div>
             }
         </div>
     );

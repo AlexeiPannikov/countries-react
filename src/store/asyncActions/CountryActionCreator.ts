@@ -9,7 +9,6 @@ export const getCountryAsync = (countryName: string | undefined) => {
         dispatch(gettingCountry())
         try {
             if(!countryName) return;
-            dispatch(clearCountry())
             const res = await RequestService.getCountryByName(countryName);
             if (!res) {
                 dispatch(getCountryError({message: `Country ${countryName} not found`}));

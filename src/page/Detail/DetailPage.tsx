@@ -14,6 +14,7 @@ import {IoArrowBack} from "react-icons/io5";
 import BorderCountries from "./components/BorderCountries/BorderCountries";
 import Message from "../../components/Message/Message";
 import {MessageTypesEnum} from "../../components/Message/MessageTypesEnum";
+import {clearCountry} from "../../store/reducers/CountrySlice";
 
 const DetailPage = () => {
     const {name} = useParams();
@@ -22,6 +23,12 @@ const DetailPage = () => {
 
     const {isLoading, country, error} = useTypedSelector(state => state.country);
     const countries = useTypedSelector(state => state.allCountries).countries;
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearCountry())
+        }
+    }, [])
 
     useEffect(() => {
         if (!(name === country.name.common)) {
@@ -75,7 +82,7 @@ const DetailPage = () => {
                 <Preloader isLoading={isLoading}/>
                 <div className={cl.Wrapper}>
                     {
-                        !error && Object.keys(country).length > 0 &&
+                        !error && !isLoading && Object.keys(country).length > 0 &&
                         <div className={cl.Content}>
                             <div className={cl.Flag}>
                                 <img src={country.flags.svg} alt={country.name.official}/>

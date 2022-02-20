@@ -21,7 +21,7 @@ const BorderCountries: FC<IProps> = ({countries}) => {
             <h3 className={cl.Title}>Border countries: </h3>
             <div className={cl.Buttons}>
                 {
-                    countries.map(item => <Button padding="5px 10px" key={item} onClick={() => openCountryPage(item)}>{item}</Button>)
+                    countries.map(item => <Button padding="5px 10px" margin={"5px 5px"} key={item} onClick={() => openCountryPage(item)}>{item}</Button>)
                 }
             </div>
         </div>
