@@ -29,34 +29,34 @@ const HomePage = () => {
         new DropdownItemModel({name: "Oceania", value: "Oceania"}),
     ])
 
+    const searchQueryObject = Object.fromEntries([...searchParams])
+
     useEffect(() => {
         handleSearch();
-    }, [countries, searchParams.get("text"), searchParams.get("region")])
+    }, [countries, searchParams])
 
-    function handleSearch(isFirstRender: boolean = false) {
+    function handleSearch() {
         if (countries.length === 0) return;
         let data = [...countries];
-        if (isFirstRender) {
-            setFilteredCountries(data);
-            return;
+        if(Object.keys(searchQueryObject).length == 0) {
+            setFilteredCountries(data)
         }
-        const textFromParams = searchParams.get("text");
-        const regionFromParams = searchParams.get("region");
-        if (textFromParams) {
-            data = data.filter(item => item.name.official.toLocaleLowerCase().replace(/\s/g, '').includes(textFromParams.toLocaleLowerCase()))
+        const {text, region} = searchQueryObject
+        if (text) {
+            data = data.filter(item => item.name.official.toLocaleLowerCase().replace(/\s/g, '').includes(text.toLocaleLowerCase()))
         }
-        if (regionFromParams) {
-            data = data.filter(item => item.region.toLocaleLowerCase().includes(regionFromParams.toLocaleLowerCase()))
+        if (region) {
+            data = data.filter(item => item.region.toLocaleLowerCase().includes(region.toLocaleLowerCase()))
         }
         setFilteredCountries(data)
     }
 
     function setText(text: string) {
-        setSearchParams({text, region: searchParams.get("region") || ""});
+        setSearchParams({...searchQueryObject, text});
     }
 
     function setRegion(region: string) {
-        setSearchParams({text: searchParams.get("text") || "", region});
+        setSearchParams({...searchQueryObject, region});
     }
 
     return (
